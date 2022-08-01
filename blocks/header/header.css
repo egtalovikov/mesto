@@ -1,0 +1,22 @@
+.header {
+  padding: 28px 0 0;
+  margin: 0 0 38.25px;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    padding: 45px 100px 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    padding: 45px 200px 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    margin: 0 0 36.25px;
+  }
+}
