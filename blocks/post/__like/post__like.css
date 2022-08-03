@@ -1,0 +1,9 @@
+.post__like {
+  border: none;
+  background: url("../../../images/post-heart.svg") center no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+  height: 19px;
+  width: 22px;
+  padding: 0;
+}

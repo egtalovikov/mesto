@@ -9,5 +9,6 @@
   .profile {
     flex-direction: row;
     justify-content: flex-start;
+    margin: 0 0 50px;
   }
 }
