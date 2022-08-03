@@ -20,3 +20,5 @@
 @import url("../blocks/post/__bottom/post__bottom.css");
 @import url("../blocks/post/__title/post__title.css");
 @import url("../blocks/post/__like/post__like.css");
+@import url("../blocks/footer/footer.css");
+@import url("../blocks/footer/__copyright/footer__copyright.css");
