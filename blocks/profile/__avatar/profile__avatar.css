@@ -1,0 +1,16 @@
+.profile__avatar {
+  width: 120px;
+  min-width: 120px;
+  height: 120px;
+  background-image: url(../../../images/profile-сousteau.jpg);
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  margin: 0 0 26px;
+}
+
+@media screen and (min-width: 1280px) {
+  .profile__avatar {
+    margin: 0 30px 0 0;
+  }
+}
