@@ -10,6 +10,7 @@
   .posts {
     grid-template-rows: repeat(3, 361px);
     grid-template-columns: repeat(2, 282px);
+    margin: 0 0 67px;
   }
 }
 

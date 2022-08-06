@@ -16,61 +16,60 @@
   <div class="page__container">
     <header class="header">
       <img src="./images/header-logo.svg" alt="Логотип Mesto Russia" class="header__logo">
-      <div class="header__border"></div>
     </header>
     <main class="content">
       <section class="profile" aria-label="profile">
-        <div class="profile__avatar"></div>
+        <img src="./images/profile-сousteau.jpg" alt="Аватар" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button buttons"></button>
+          <button type="button" class="profile__edit-button buttons"></button>
           <p class="profile__bio">Исследователь океана</p>
         </div>
-        <button class="profile__add-button buttons"></button>
+        <button type="button" class="profile__add-button buttons"></button>
       </section>
       <section class="posts">
-        <div class="post">
+        <article class="post">
           <img src="./images/post-karachaevsk.jpg" alt="Карачаевск" class="post__photo">
           <div class="post__bottom">
             <h2 class="post__title">Карачаевск</h2>
             <button class="post__like"></button>
           </div>
-        </div>
-        <div class="post">
+        </article>
+        <article class="post">
           <img src="./images/post-elbrus.jpg" alt="Эльбрус" class="post__photo">
           <div class="post__bottom">
             <h2 class="post__title">Гора Эльбрус</h2>
-            <button class="post__like"></button>
+            <button type="button" class="post__like"></button>
           </div>
-        </div>
-        <div class="post">
+        </article>
+        <article class="post">
           <img src="./images/post-dombay.jpg" alt="Домбай" class="post__photo">
           <div class="post__bottom">
             <h2 class="post__title">Домбай</h2>
             <button class="post__like"></button>
           </div>
-        </div>
-        <div class="post">
+        </article>
+        <article class="post">
           <img src="./images/post-elbrus.jpg" alt="Эльбрус" class="post__photo">
           <div class="post__bottom">
             <h2 class="post__title">Гора Эльбрус</h2>
             <button class="post__like"></button>
           </div>
-        </div>
-        <div class="post">
+        </article>
+        <article class="post">
           <img src="./images/post-dombay.jpg" alt="Домбай" class="post__photo">
           <div class="post__bottom">
             <h2 class="post__title">Домбай</h2>
             <button class="post__like"></button>
           </div>
-        </div>
-        <div class="post">
+        </article>
+        <article class="post">
           <img src="./images/post-karachaevsk.jpg" alt="Карачаевск" class="post__photo">
           <div class="post__bottom">
             <h2 class="post__title">Карачаево-Черкессия</h2>
             <button class="post__like"></button>
           </div>
-        </div>
+        </article>
       </section>
     </main>
     <footer class="footer">
@@ -79,20 +78,18 @@
   </div>
   <div class="popup">
     <div class="popup__container">
-      <div class="popup__content">
-        <button class="popup__close-button buttons"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="input">
-          <input type="text" class="input__text input__text_type_name">
-          <input type="text" class="input__text input__text_type_bio">
-          <button class="popup__submit-button buttons">
-            Сохранить
-          </button>
-        </form>
-      </div>
+      <button type="button" class="popup__close-button buttons"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="form">
+        <input type="text" name="name" class="form__text form__text_type_name">
+        <input type="text" name="bio" class="form__text form__text_type_bio">
+        <button type="submit" class="form__submit-button buttons">
+          Сохранить
+        </button>
+      </form>
     </div>
   </div>
-  <script src="script.js"></script>
+  <script src="./script/script.js"></script>
 </body>
 
 </html>
