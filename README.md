@@ -15,6 +15,7 @@
 * CSS Flexbox
 * CSS Grid
 * CSS Animations
+* JavaScript
 * Nested БЭМ
 * Git
 
