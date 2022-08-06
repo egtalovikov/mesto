@@ -1,7 +1,6 @@
 .post__like {
   border: none;
-  background: url("../../../images/post-like.svg") center no-repeat;
-  background-size: 100%;
+  background: url("../../../images/post-like.svg") center/100% no-repeat;
   cursor: pointer;
   height: 19px;
   width: 22px;

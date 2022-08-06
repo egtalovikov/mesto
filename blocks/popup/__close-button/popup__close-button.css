@@ -1,7 +1,6 @@
 .popup__close-button {
   border: none;
-  background: url("../../../images/popup-close.svg") center no-repeat;
-  background-size: 100%;
+  background: url("../../../images/popup-close.svg") center/100% no-repeat;
   cursor: pointer;
   width: 20px;
   height: 20px;

@@ -1,7 +1,6 @@
 .profile__edit-button {
   border: 1px solid #FFFFFF;
-  background: url("../../../images/profile-edit-button.svg") center no-repeat;
-  background-size: 42%;
+  background: url("../../../images/profile-edit-button.svg") center/42% no-repeat;
   cursor: pointer;
   width: 18px;
   height: 18px;
