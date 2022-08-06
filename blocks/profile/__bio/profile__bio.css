@@ -3,6 +3,7 @@
   line-height: 16.94px;
   text-align: center;
   margin: 0 0 33px;
+  max-width: 189px;
 }
 
 @media screen and (min-width: 1280px) {
@@ -11,5 +12,6 @@
     line-height: 21.78px;
     text-align: left;
     margin: 0;
+    max-width: 294px;
   }
 }

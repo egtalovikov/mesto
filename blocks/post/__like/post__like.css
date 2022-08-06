@@ -1,9 +1,15 @@
 .post__like {
   border: none;
-  background: url("../../../images/post-heart.svg") center no-repeat;
+  background: url("../../../images/post-like.svg") center no-repeat;
   background-size: 100%;
   cursor: pointer;
   height: 19px;
   width: 22px;
   padding: 0;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.post__like:hover {
+  opacity: 0.5;
 }

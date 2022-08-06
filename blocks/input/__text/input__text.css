@@ -1,0 +1,26 @@
+.input__text {
+  font-size: 14px;
+  line-height: 16.94px;
+  box-sizing: border-box;
+  width: 238px;
+  height: 27px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0 0 30px;
+  padding: 0;
+}
+
+.input__text:last-of-type {
+  margin: 0 0 45px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .input__text {
+    width: 358px;
+  }
+
+  .input__text:last-of-type {
+    margin: 0 0 48px;
+  }
+}
