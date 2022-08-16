@@ -19,7 +19,7 @@
     </header>
     <main class="content">
       <section class="profile" aria-label="профиль">
-        <img src="./images/profile-сousteau.jpg" alt="Аватар" class="profile__avatar">
+        <img src="./images/profile-cousteau.jpg" alt="Аватар" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button type="button" class="profile__edit-button buttons"></button>
@@ -28,48 +28,7 @@
         <button type="button" class="profile__add-button buttons"></button>
       </section>
       <section class="posts" aria-label="посты">
-        <article class="post">
-          <img src="./images/post-karachaevsk.jpg" alt="Карачаевск" class="post__photo">
-          <div class="post__bottom">
-            <h2 class="post__title">Карачаевск</h2>
-            <button type="button" class="post__like"></button>
-          </div>
-        </article>
-        <article class="post">
-          <img src="./images/post-elbrus.jpg" alt="Эльбрус" class="post__photo">
-          <div class="post__bottom">
-            <h2 class="post__title">Гора Эльбрус</h2>
-            <button type="button" class="post__like"></button>
-          </div>
-        </article>
-        <article class="post">
-          <img src="./images/post-dombay.jpg" alt="Домбай" class="post__photo">
-          <div class="post__bottom">
-            <h2 class="post__title">Домбай</h2>
-            <button type="button" class="post__like"></button>
-          </div>
-        </article>
-        <article class="post">
-          <img src="./images/post-elbrus.jpg" alt="Эльбрус" class="post__photo">
-          <div class="post__bottom">
-            <h2 class="post__title">Гора Эльбрус</h2>
-            <button type="button" class="post__like"></button>
-          </div>
-        </article>
-        <article class="post">
-          <img src="./images/post-dombay.jpg" alt="Домбай" class="post__photo">
-          <div class="post__bottom">
-            <h2 class="post__title">Домбай</h2>
-            <button type="button" class="post__like"></button>
-          </div>
-        </article>
-        <article class="post">
-          <img src="./images/post-karachaevsk.jpg" alt="Карачаевск" class="post__photo">
-          <div class="post__bottom">
-            <h2 class="post__title">Карачаево-Черкессия</h2>
-            <button type="button" class="post__like"></button>
-          </div>
-        </article>
+
       </section>
     </main>
     <footer class="footer">
@@ -89,7 +48,31 @@
       </form>
     </div>
   </div>
-  <script src="./script/script.js"></script>
+  <div class="popup">
+    <div class="popup__container">
+      <button type="button" class="popup__close-button buttons"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="form">
+        <input type="text" name="name" class="form__text form__text_type_name">
+        <input type="text" name="bio" class="form__text form__text_type_bio">
+        <button type="submit" class="form__submit-button buttons">
+          Сохранить
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <template id="post-template">
+    <article class="post">
+      <img src="" alt="" class="post__photo">
+      <div class="post__bottom">
+        <h2 class="post__title"></h2>
+        <button type="button" class="post__like"></button>
+      </div>
+    </article>
+  </template>
+
+  <script src="./scripts/script.js"></script>
 </body>
 
 </html>
