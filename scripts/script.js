@@ -72,6 +72,9 @@ function addPost(name, link) {
   const photo = postElement.querySelector('.post__photo');
   photo.setAttribute('src', link);
   postElement.querySelector('.post__title').textContent = name;
+  postElement.querySelector('.post__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('post__like_active');
+  })
 
   postsContainer.prepend(postElement);
 }
