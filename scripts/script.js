@@ -70,10 +70,19 @@ function addPost(name, link) {
   const postElement = postTemplate.querySelector('.post').cloneNode(true);
 
   const photo = postElement.querySelector('.post__photo');
-  postElement.querySelector('.post__delete-button').addEventListener('click', function(evt){
+  postElement.querySelector('.post__delete-button').addEventListener('click', function() {
     postElement.remove();
   })
   photo.setAttribute('src', link);
+  photo.setAttribute('alt', name);
+  photo.addEventListener('click', function() {
+    const popupImageItem = document.querySelector('.popup__image');
+    const popupCaption = document.querySelector('.popup__image-caption');
+    popupImageItem.setAttribute('src', link);
+    popupImageItem.setAttribute('alt', name);
+    popupCaption.textContent = name;
+    document.querySelector('.popup_image').classList.add('popup_opened');
+  });
   postElement.querySelector('.post__title').textContent = name;
   postElement.querySelector('.post__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('post__like_active');

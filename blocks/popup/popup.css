@@ -6,7 +6,10 @@
   top: 0;
   left: 0;
   min-height: 100%;
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
   align-items: center;
   justify-content: center;
 }
