@@ -16,6 +16,7 @@
 @import url("../blocks/posts/posts.css");
 @import url("../blocks/post/post.css");
 @import url("../blocks/post/__photo/post__photo.css");
+@import url("../blocks/post/__delete-button/post__delete-button.css");
 @import url("../blocks/post/__bottom/post__bottom.css");
 @import url("../blocks/post/__title/post__title.css");
 @import url("../blocks/post/__like/post__like.css");
