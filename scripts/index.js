@@ -4,10 +4,9 @@ const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
-const buttonClose = document.querySelectorAll('.popup__close-button');
 const buttonSubmit = document.querySelector('.popup__button');
 const editFormElement = document.querySelector('.popup__form_edit');
-const addFormElement = document.querySelector('.popup_add');
+const addFormElement = document.querySelector('.popup__form_add');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_bio');
 const profileName = document.querySelector('.profile__name');
@@ -16,29 +15,30 @@ const postsContainer = document.querySelector('.posts');
 const postTemplate = document.querySelector('#post-template').content.querySelector('.post');
 const postNameInput = document.querySelector('.popup__input_type_post-name');
 const linkInput = document.querySelector('.popup__input_type_link');
+const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
 
 const openPopup = (el) => {
   el.classList.add('popup_opened');
-  resetValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-  });
+  resetValidation(settings);
   document.addEventListener('keydown', keyHandler);
 }
 
 const closePopup = (el) => {
   el.classList.remove('popup_opened');
+  document.removeEventListener('keydown', keyHandler);
 }
 
 
 
 const editFormSubmitHandler = (evt) => {
-  evt.preventDefault();
-
   profileBio.textContent = jobInput.value;
   profileName.textContent = nameInput.value;
 
@@ -60,7 +60,7 @@ const createPostElement = (name, link) => {
     popupImageItem.setAttribute('src', link);
     popupImageItem.setAttribute('alt', name);
     popupCaption.textContent = name;
-    document.querySelector('.popup_image').classList.add('popup_opened');
+    openPopup(document.querySelector('.popup_image'));
   });
   postElement.querySelector('.post__title').textContent = name;
   postElement.querySelector('.post__like').addEventListener('click', function (evt) {
@@ -75,15 +75,15 @@ const addPost = (name, link) => {
 }
 
 const addFormSubmitHandler = (evt) => {
-  evt.preventDefault();
 
   addPost(postNameInput.value, linkInput.value);
   closePopup(popupAdd);
+  addFormElement.reset();
 }
 
 const closePopupByClickingOverlay = (evt) => {
-  if (evt.target !== ('.popup')) {
-    closePopup(evt.target);
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+    closePopup(evt.currentTarget);
   }
 };
 
@@ -94,7 +94,7 @@ const keyHandler = (evt) => {
   }
 };
 
-addFormElement.addEventListener('submit', addFormSubmitHandler);
+popupAdd.addEventListener('submit', addFormSubmitHandler);
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 buttonEdit.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
@@ -102,18 +102,13 @@ buttonEdit.addEventListener('click', () => {
   openPopup(popupEdit);
 });
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
-buttonClose.forEach((el) => {
-  el.addEventListener('click', () => {
-    const closestPopup = el.closest('.popup');
-    closePopup(closestPopup);
-  });
-});
 
 popups.forEach((el) => {
-  el.style.transition = "visibility .5s linear, opacity .5s linear";
   el.addEventListener('click', closePopupByClickingOverlay);
 });
 
 initialPosts.forEach((el) => {
   addPost(el.name, el.link);
 });
+
+enableValidation(settings);
