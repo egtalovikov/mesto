@@ -1,4 +1,4 @@
-.form__text {
+.popup__input {
   font-size: 14px;
   line-height: 17px;
   box-sizing: border-box;
@@ -6,21 +6,12 @@
   height: 27px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 0 0 30px;
   padding: 0;
+  position: relative;
 }
-
-.form__text:last-of-type {
-  margin: 0 0 45px;
-}
-
 
 @media screen and (min-width: 768px) {
-  .form__text {
+  .popup__input {
     width: 358px;
-  }
-
-  .form__text:last-of-type {
-    margin: 0 0 48px;
   }
 }

@@ -1,4 +1,4 @@
-.form__submit-button {
+.popup__button {
   border: none;
   font-size: 14px;
   line-height: 17px;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .form__submit-button {
+  .popup__button {
     font-size: 18px;
     line-height: 22px;
     width: 358px;

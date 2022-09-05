@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
   <script defer src="./scripts/cards.js"></script>
+  <script defer src="./scripts/validate.js"></script>
   <script defer src="./scripts/index.js"></script>
   <meta name="description"
     content="Интерактивная соцсеть с возможностью добавлять фотографии, удалять их, ставить лайки, редактирования профиля и просмотра увеличенного изображения.">
@@ -40,10 +41,18 @@
     <div class="popup__container">
       <button type="button" aria-label="Закрытие попапа" class="popup__close-button buttons"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="form form_edit">
-        <input type="text" placeholder="Имя" name="name" class="form__text form__text_type_name" required>
-        <input type="text" placeholder="О Себе" name="bio" class="form__text form__text_type_bio" required>
-        <button type="submit" class="form__submit-button buttons">
+      <form class="popup__form popup__form_edit" novalidate>
+        <div class="popup__field">
+          <input type="text" placeholder="Имя" name="name" class="popup__input popup__input_type_name" id="name-input"
+            required minlength="2" maxlength="40">
+          <span class="popup__error name-input-error"></span>
+        </div>
+        <div class="popup__field">
+          <input type="text" placeholder="О Себе" name="bio" class="popup__input popup__input_type_bio" id="bio-input"
+            required minlength="2" maxlength="200">
+          <span class="popup__error bio-input-error"></span>
+        </div>
+        <button type="submit" class="popup__button buttons">
           Сохранить
         </button>
       </form>
@@ -53,11 +62,19 @@
     <div class="popup__container">
       <button type="button" aria-label="Закрытие попапа" class="popup__close-button buttons"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="form form_add">
-        <input type="text" placeholder="Название" name="post-name" class="form__text form__text_type_post-name" required>
-        <input type="url" placeholder="Ссылка на картинку" name="link" class="form__text form__text_type_link" required>
-        <button type="submit" class="form__submit-button buttons">
-          Сохранить
+      <form class="popup__form popup__form_add" novalidate>
+        <div class="popup__field">
+          <input type="text" placeholder="Название" name="post-name" class="popup__input popup__input_type_post-name" id="post-name-input"
+            minlength="2" maxlength="30" required>
+          <span class="popup__error post-name-input-error"></span>
+        </div>
+        <div class="popup__field">
+          <input type="url" placeholder="Ссылка на картинку" name="link" class="popup__input popup__input_type_link" id="link-input"
+            required>
+          <span class="popup__error link-input-error"></span>
+        </div>
+        <button type="submit" class="popup__button buttons">
+          Создать
         </button>
       </form>
     </div>

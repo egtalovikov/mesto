@@ -4,20 +4,28 @@ const popupAdd = document.querySelector('.popup_add');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
 const buttonClose = document.querySelectorAll('.popup__close-button');
-const buttonSubmit = document.querySelector('.form__submit-button');
-const editFormElement = document.querySelector('.form_edit');
-const addFormElement = document.querySelector('.form_add');
-const nameInput = document.querySelector('.form__text_type_name');
-const jobInput = document.querySelector('.form__text_type_bio');
+const buttonSubmit = document.querySelector('.popup__button');
+const editFormElement = document.querySelector('.popup__form_edit');
+const addFormElement = document.querySelector('.popup_add');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_bio');
 const profileName = document.querySelector('.profile__name');
 const profileBio = document.querySelector('.profile__bio');
 const postsContainer = document.querySelector('.posts');
 const postTemplate = document.querySelector('#post-template').content.querySelector('.post');
-const postNameInput = document.querySelector('.form__text_type_post-name');
-const linkInput = document.querySelector('.form__text_type_link');
+const postNameInput = document.querySelector('.popup__input_type_post-name');
+const linkInput = document.querySelector('.popup__input_type_link');
 
 function openPopup(el) {
   el.classList.add('popup_opened');
+  resetValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  });
 }
 
 function closePopup(el) {
