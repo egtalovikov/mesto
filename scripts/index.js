@@ -1,4 +1,5 @@
 const popups = document.querySelectorAll('.popup');
+const popupContainer = document.querySelectorAll('.popup__container');
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const buttonEdit = document.querySelector('.profile__edit-button');
@@ -91,6 +92,14 @@ buttonClose.forEach(function (el, i) {
   buttonClose[i].addEventListener('click', function () {
     const closestPopup = buttonClose[i].closest('.popup');
     closePopup(closestPopup);
+  });
+});
+
+popups.forEach(function (el, i) {
+  popups[i].addEventListener('click', function (evt) {
+    if (evt.target !== ('.popup')) {
+      closePopup(evt.target);
+    };
   });
 });
 
