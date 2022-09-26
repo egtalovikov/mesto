@@ -1,3 +1,6 @@
+import Card from "./Card.js";
+import { initialPosts } from "./initial-cards.js"
+
 const popups = document.querySelectorAll('.popup');
 const popupContainer = document.querySelectorAll('.popup__container');
 const popupEdit = document.querySelector('.popup_edit');
@@ -11,10 +14,10 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_bio');
 const profileName = document.querySelector('.profile__name');
 const profileBio = document.querySelector('.profile__bio');
-const postsContainer = document.querySelector('.posts');
-const postTemplate = document.querySelector('#post-template').content.querySelector('.post');
 const postNameInput = document.querySelector('.popup__input_type_post-name');
 const linkInput = document.querySelector('.popup__input_type_link');
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__image-caption');
 const settings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -23,7 +26,6 @@ const settings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
-
 
 const openPopup = (el) => {
   el.classList.add('popup_opened');
@@ -36,47 +38,17 @@ const closePopup = (el) => {
   document.removeEventListener('keydown', keyHandler);
 }
 
-
-
-const editFormSubmitHandler = (evt) => {
+const editFormSubmitHandler = () => {
   profileBio.textContent = jobInput.value;
   profileName.textContent = nameInput.value;
 
   closePopup(popupEdit);
 }
 
-const createPostElement = (name, link) => {
-  const postElement = postTemplate.cloneNode(true);
-
-  const photo = postElement.querySelector('.post__photo');
-  postElement.querySelector('.post__delete-button').addEventListener('click', function () {
-    postElement.remove();
-  })
-  photo.setAttribute('src', link);
-  photo.setAttribute('alt', name);
-  photo.addEventListener('click', function () {
-    const popupImageItem = document.querySelector('.popup__image');
-    const popupCaption = document.querySelector('.popup__image-caption');
-    popupImageItem.setAttribute('src', link);
-    popupImageItem.setAttribute('alt', name);
-    popupCaption.textContent = name;
-    openPopup(document.querySelector('.popup_image'));
-  });
-  postElement.querySelector('.post__title').textContent = name;
-  postElement.querySelector('.post__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('post__like_active');
-  })
-  return postElement;
-}
-
-const addPost = (name, link) => {
-  const createdPost = createPostElement(name, link);
-  postsContainer.prepend(createdPost);
-}
-
-const addFormSubmitHandler = (evt) => {
-
-  addPost(postNameInput.value, linkInput.value);
+const addFormSubmitHandler = () => {
+  const card = new Card({name: postNameInput.value, link: linkInput.value}, '.post-template')
+  const cardElement = card.generateCard();
+  document.querySelector('.posts').append(cardElement);
   closePopup(popupAdd);
   addFormElement.reset();
 }
@@ -107,8 +79,14 @@ popups.forEach((el) => {
   el.addEventListener('click', closePopupByClickingOverlay);
 });
 
-initialPosts.forEach((el) => {
-  addPost(el.name, el.link);
+
+initialPosts.forEach((item) => {
+  const card = new Card(item, '.post-template')
+  const cardElement = card.generateCard();
+
+  document.querySelector('.posts').append(cardElement);
 });
 
 enableValidation(settings);
+
+export { popupImage, popupCaption, openPopup };

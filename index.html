@@ -5,9 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
-  <script defer src="./scripts/cards.js"></script>
-  <script defer src="./scripts/validate.js"></script>
-  <script defer src="./scripts/index.js"></script>
   <meta name="description"
     content="Интерактивная соцсеть с возможностью добавлять фотографии, удалять их, ставить лайки, редактирования профиля и просмотра увеличенного изображения.">
   <meta name="keywords" content="соцсеть, фото, лайки">
@@ -89,7 +86,7 @@
     </div>
   </div>
 
-  <template id="post-template">
+  <template class="post-template">
     <article class="post">
       <img src="#" alt="" class="post__photo">
       <button type="button" aria-label="Удаление карточки" class="post__delete-button"></button>
@@ -100,6 +97,10 @@
     </article>
   </template>
 
+  <script type="module" src="./scripts/initial-cards.js"></script>
+  <script type="module" src="./scripts/index.js"></script>
+  <script type="module" src="./scripts/validate.js"></script>
+  <script type="module" src="./scripts/FormValidator.js"></script>
 </body>
 
 </html>
