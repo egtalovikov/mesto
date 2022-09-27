@@ -3,14 +3,13 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 
 const popups = document.querySelectorAll('.popup');
-const popupContainer = document.querySelectorAll('.popup__container');
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
+const popupImageContainer = document.querySelector('.popup_image');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
-const buttonSubmit = document.querySelector('.popup__button');
-const editFormElement = document.querySelector('.popup__form_edit');
-const addFormElement = document.querySelector('.popup__form_add');
+const formEditElement = document.querySelector('.popup__form_edit');
+const formAddElement = document.querySelector('.popup__form_add');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_bio');
 const profileName = document.querySelector('.profile__name');
@@ -28,26 +27,21 @@ const settings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
-const addFormValidator = new FormValidator(settings, addFormElement);
-const editFormValidator = new FormValidator(settings, editFormElement);
+const formAddValidator = new FormValidator(settings, formAddElement);
+const formEditValidator = new FormValidator(settings, formEditElement);
 
 const openPopup = (el) => {
-  if (el.classList.contains('popup_add')) {
-    addFormValidator.resetValidation(settings);
-  }
-  else if (el.classList.contains('popup_edit')) {
-    editFormValidator.resetValidation(settings);
-  }
   el.classList.add('popup_opened');
-  document.addEventListener('keydown', keyHandler);
+  document.addEventListener('keydown', handleEscapeKey);
 }
 
 const closePopup = (el) => {
   el.classList.remove('popup_opened');
-  document.removeEventListener('keydown', keyHandler);
+  document.removeEventListener('keydown', handleEscapeKey);
 }
 
-const editFormSubmitHandler = () => {
+const formEditSubmitHandler = (evt) => {
+  evt.preventDefault();
   profileBio.textContent = jobInput.value;
   profileName.textContent = nameInput.value;
 
@@ -63,13 +57,14 @@ const createPostElement = (data) => {
 
 const addPost = (data) => {
   const createdPost = createPostElement(data);
-  postsContainer.append(createdPost);
+  postsContainer.prepend(createdPost);
 }
 
-const addFormSubmitHandler = () => {
+const formAddSubmitHandler = (evt) => {
+  evt.preventDefault();
   addPost({name: postNameInput.value, link: linkInput.value});
   closePopup(popupAdd);
-  addFormElement.reset();
+  formAddElement.reset();
 }
 
 const closePopupByClickingOverlay = (evt) => {
@@ -78,21 +73,25 @@ const closePopupByClickingOverlay = (evt) => {
   }
 };
 
-const keyHandler = (evt) => {
+const handleEscapeKey = (evt) => {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 };
 
-popupAdd.addEventListener('submit', addFormSubmitHandler);
-editFormElement.addEventListener('submit', editFormSubmitHandler);
+popupAdd.addEventListener('submit', formAddSubmitHandler);
+formEditElement.addEventListener('submit', formEditSubmitHandler);
 buttonEdit.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileBio.textContent;
+  formEditValidator.resetValidation(settings);
   openPopup(popupEdit);
 });
-buttonAdd.addEventListener('click', () => openPopup(popupAdd));
+buttonAdd.addEventListener('click', () => {
+  formAddValidator.resetValidation(settings);
+  openPopup(popupAdd);
+});
 
 popups.forEach((el) => {
   el.addEventListener('click', closePopupByClickingOverlay);
@@ -103,7 +102,7 @@ initialPosts.forEach((data) => {
   addPost(data);
 });
 
-addFormValidator.enableValidation();
-editFormValidator.enableValidation();
+formAddValidator.enableValidation();
+formEditValidator.enableValidation();
 
-export { popupImage, popupCaption, openPopup };
+export { popupImageContainer, popupImage, popupCaption, openPopup };
