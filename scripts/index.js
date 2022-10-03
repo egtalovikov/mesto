@@ -2,7 +2,6 @@ import { initialPosts } from "./initial-cards.js"
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 
-const popups = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const popupImageContainer = document.querySelector('.popup_image');
@@ -29,16 +28,6 @@ const settings = {
 };
 const formAddValidator = new FormValidator(settings, formAddElement);
 const formEditValidator = new FormValidator(settings, formEditElement);
-
-const openPopup = (el) => {
-  el.classList.add('popup_opened');
-  document.addEventListener('keydown', handleEscapeKey);
-}
-
-const closePopup = (el) => {
-  el.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscapeKey);
-}
 
 const formEditSubmitHandler = (evt) => {
   evt.preventDefault();
@@ -67,18 +56,7 @@ const formAddSubmitHandler = (evt) => {
   formAddElement.reset();
 }
 
-const closePopupByClickingOverlay = (evt) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
-    closePopup(evt.currentTarget);
-  }
-};
 
-const handleEscapeKey = (evt) => {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-};
 
 popupAdd.addEventListener('submit', formAddSubmitHandler);
 formEditElement.addEventListener('submit', formEditSubmitHandler);
@@ -91,10 +69,6 @@ buttonEdit.addEventListener('click', () => {
 buttonAdd.addEventListener('click', () => {
   formAddValidator.resetValidation(settings);
   openPopup(popupAdd);
-});
-
-popups.forEach((el) => {
-  el.addEventListener('click', closePopupByClickingOverlay);
 });
 
 
