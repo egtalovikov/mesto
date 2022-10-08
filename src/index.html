@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <meta name="description"
     content="Интерактивная соцсеть с возможностью добавлять фотографии, удалять их, ставить лайки, редактирования профиля и просмотра увеличенного изображения.">
   <meta name="keywords" content="соцсеть, фото, лайки">
@@ -15,11 +14,11 @@
 <body class="page">
   <div class="page__container">
     <header class="header">
-      <img src="./images/header-logo.svg" alt="Логотип Mesto Russia" class="header__logo">
+      <img src="<%=require('./images/header-logo.svg')%>" alt="Логотип Mesto Russia" class="header__logo">
     </header>
     <main class="content">
       <section class="profile" aria-label="профиль">
-        <img src="./images/profile-cousteau.jpg" alt="Аватар" class="profile__avatar">
+        <img src="<%=require('./images/profile-cousteau.jpg')%>" alt="Аватар" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button type="button" aria-label="Редактирование профиля" class="profile__edit-button buttons"></button>
@@ -97,7 +96,6 @@
     </article>
   </template>
 
-  <script type="module" src="./pages/index.js"></script>
 </body>
 
 </html>
