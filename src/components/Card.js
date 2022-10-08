@@ -35,9 +35,10 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._photo = this._element.querySelector('.post__photo');
 
-    this._element.querySelector('.post__photo').src = this._link;
-    this._element.querySelector('.post__photo').alt = this._name;
+    this._photo.src = this._link;
+    this._photo.alt = this._name;
     this._element.querySelector('.post__title').textContent = this._name;
     this._setEventListeners();
 

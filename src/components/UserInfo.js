@@ -7,9 +7,9 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    const UserInfo = {name: this._nameSelector.textContent, bio: this._bioSelector.textContent};
+    const userInfo = {name: this._nameSelector.textContent, bio: this._bioSelector.textContent};
 
-    return UserInfo;
+    return userInfo;
   }
 
   setUserInfo() {

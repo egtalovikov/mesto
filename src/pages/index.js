@@ -20,19 +20,26 @@ import {
   postNameInput,
   linkInput
 } from "../utils/constants.js"
+import { data } from 'autoprefixer';
+
+function createCard(data) {
+  const card = new Card(data, '.post-template', handleCardClick);
+  return card.generateCard();
+}
+
+function handleCardClick() {
+  this._element.querySelector('.post__photo').addEventListener('click', () => popupImageElement.open(this._name, this._link));
+}
+
+const cardList = new Section({
+  items: initialPosts,
+  renderer: (data) => {
+    cardList.addItem(createCard(data));
+  }
+}, postsContainer);
 
 const formAddSubmitHandler = () => {
-  const addPost = new Section({
-    items: ([{name: postNameInput.value, link: linkInput.value}]),
-    renderer: (data) => {
-      const post = new Card(data, '.post-template', handleCardClick)
-      const postElement = post.generateCard();
-
-      addPost.addItem(postElement);
-    }
-  }, postsContainer);
-
-  addPost.renderItems();
+  cardList.addItem(createCard({ name: postNameInput.value, link: linkInput.value }));
 
   popupAddElement.close();
 
@@ -40,7 +47,7 @@ const formAddSubmitHandler = () => {
 }
 
 const formEditSubmitHandler = () => {
-  UserInfoElement.setUserInfo();
+  userInfoElement.setUserInfo();
 
   popupEditElement.close();
 }
@@ -50,31 +57,17 @@ const formEditValidator = new FormValidator(settings, formEditElement);
 const popupAddElement = new PopupWithForm('.popup_add', formAddSubmitHandler);
 const popupEditElement = new PopupWithForm('.popup_edit', formEditSubmitHandler);
 const popupImageElement = new PopupWithImage('.popup_image');
-const UserInfoElement = new UserInfo(profileName, profileBio, nameInput, jobInput);
-
-function handleCardClick() {
-  this._element.querySelector('.post__photo').addEventListener('click', () => popupImageElement.open(this._name, this._link));
-}
-
-const cardList = new Section({
-  items: initialPosts,
-  renderer: (data) => {
-    const post = new Card(data, '.post-template', handleCardClick)
-    const postElement = post.generateCard();
-
-    cardList.addItem(postElement);
-  }
-}, postsContainer);
+const userInfoElement = new UserInfo(profileName, profileBio, nameInput, jobInput);
 
 buttonEdit.addEventListener('click', () => {
-  const UserInfoArray = UserInfoElement.getUserInfo();
-  nameInput.value = UserInfoArray.name;
-  jobInput.value = UserInfoArray.bio;
-  formEditValidator.resetValidation(settings);
+  const userInfoArray = userInfoElement.getUserInfo();
+  nameInput.value = userInfoArray.name;
+  jobInput.value = userInfoArray.bio;
+  formEditValidator.resetValidation();
   popupEditElement.open();
 });
 buttonAdd.addEventListener('click', () => {
-  formAddValidator.resetValidation(settings);
+  formAddValidator.resetValidation();
   popupAddElement.open();
 });
 
