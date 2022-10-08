@@ -1,10 +1,9 @@
-import { popupImageContainer, popupImage, popupCaption, openPopup } from "./index.js";
-
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -15,13 +14,6 @@ export default class Card {
       .cloneNode(true);
 
     return postElement;
-  }
-
-  _handleOpenPopup() {
-    popupImage.src = this._link;
-    popupImage.alt = this._name;
-    popupCaption.textContent = this._name;
-    openPopup(popupImageContainer);
   }
 
   _removeCard() {
@@ -37,8 +29,8 @@ export default class Card {
     this._like = this._element.querySelector('.post__like');
 
     this._element.querySelector('.post__delete-button').addEventListener('click', () => this._removeCard());
-    this._element.querySelector('.post__photo').addEventListener('click', () => this._handleOpenPopup());
     this._like.addEventListener('click', () => this._toggleLikeButton());
+    this._handleCardClick(this._name, this._link);
   }
 
   generateCard() {
