@@ -9,6 +9,7 @@ export const popupImage = document.querySelector('.popup__image');
 export const popupCaption = document.querySelector('.popup__image-caption');
 export const profileBio = document.querySelector('.profile__bio');
 export const profileName = document.querySelector('.profile__name');
+export const profileAvatar = document.querySelector('.profile__avatar');
 export const nameInput = document.querySelector('.popup__input_type_name');
 export const jobInput = document.querySelector('.popup__input_type_bio');
 export const settings = {
