@@ -4,4 +4,5 @@
   display: grid;
   grid-template-rows: 282px 79px;
   position: relative;
+  color: #000000;
 }

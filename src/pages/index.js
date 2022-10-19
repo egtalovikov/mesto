@@ -1,5 +1,4 @@
 import '../pages/index.css';
-import { initialPosts } from "../utils/initial-cards.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -24,23 +23,26 @@ import {
 import { data } from 'autoprefixer';
 
 function createCard(data) {
-  const card = new Card(data, '.post-template', handleCardClick);
+  const card = new Card(data, '.post-template', handleCardClick, api.putLike, api.deleteLike, profileName.textContent);
   return card.generateCard();
 }
 
-function handleCardClick() {
-  this._element.querySelector('.post__photo').addEventListener('click', () => popupImageElement.open(this._name, this._link));
-}
+const initialCards = {};
 
 const cardList = new Section({
-  items: initialPosts,
+  items: initialCards,
   renderer: (data) => {
     cardList.addItem(createCard(data));
   }
 }, postsContainer);
 
+
+function handleCardClick() {
+  this._element.querySelector('.post__photo').addEventListener('click', () => popupImageElement.open(this._name, this._link));
+}
+
 const formAddSubmitHandler = () => {
-  cardList.addItem(createCard({ name: postNameInput.value, link: linkInput.value }));
+  api.addCard();
 
   popupAddElement.close();
 
@@ -49,6 +51,8 @@ const formAddSubmitHandler = () => {
 
 const formEditSubmitHandler = () => {
   userInfoElement.setUserInfo();
+
+  api.editProfile();
 
   popupEditElement.close();
 }
@@ -71,19 +75,86 @@ class Api {
         authorization: '35259131-c8d7-40ff-a93d-21891efd60f1'
       }
     })
-    .then(res => res.json())
-    .then((result) => {
-      profileName.textContent = result.name;
-      profileBio.textContent = result.about;
-      profileAvatar.src = result.avatar;
-    });
+      .then(res => res.json())
+      .then((result) => {
+        profileName.textContent = result.name;
+        profileBio.textContent = result.about;
+        profileAvatar.src = result.avatar;
+      });
+  }
+
+  putLike() {
+    fetch(`https://mesto.nomoreparties.co/v1/cohort-52/cards/${this._id}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: '35259131-c8d7-40ff-a93d-21891efd60f1',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(result => {
+        this._element.querySelector('.post__like-counter').textContent = result.likes.length;
+      })
+  }
+
+  deleteLike() {
+    fetch(`https://mesto.nomoreparties.co/v1/cohort-52/cards/${this._id}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: '35259131-c8d7-40ff-a93d-21891efd60f1',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(result => {
+        this._element.querySelector('.post__like-counter').textContent = result.likes.length;
+      })
   }
 
   getInitialCards() {
-    // ...
+    fetch('https://mesto.nomoreparties.co/v1/cohort-52/cards', {
+      headers: {
+        authorization: '35259131-c8d7-40ff-a93d-21891efd60f1'
+      }
+    })
+      .then(res => res.json())
+      .then((result) => {
+        result.reverse();
+        result.forEach((item) => {
+          cardList.addItem(createCard({ name: item.name, link: item.link, likes: item.likes, _id: item._id }));
+        })
+      })
   }
 
-  // другие методы работы с API
+  addCard() {
+    fetch('https://mesto.nomoreparties.co/v1/cohort-52/cards', {
+      method: 'POST',
+      headers: {
+        authorization: '35259131-c8d7-40ff-a93d-21891efd60f1',
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: JSON.stringify({
+        name: postNameInput.value,
+        link: linkInput.value
+      }),
+    })
+      .then(res => res.json())
+    cardList.addItem(createCard({ name: postNameInput.value, link: linkInput.value, likes: []}));
+  }
+
+  editProfile() {
+    fetch('https://mesto.nomoreparties.co/v1/cohort-52/users/me', {
+      method: 'PATCH',
+      headers: {
+        authorization: '35259131-c8d7-40ff-a93d-21891efd60f1',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: userInfoElement.getUserInfo().name,
+        about: userInfoElement.getUserInfo().bio
+      })
+    });
+  }
 }
 
 const api = new Api({
@@ -95,6 +166,7 @@ const api = new Api({
 });
 
 api.loadUserInfo();
+api.getInitialCards();
 
 buttonEdit.addEventListener('click', () => {
   const userInfoArray = userInfoElement.getUserInfo();
@@ -114,5 +186,3 @@ popupImageElement.setEventListeners();
 
 formAddValidator.enableValidation();
 formEditValidator.enableValidation();
-
-cardList.renderItems();

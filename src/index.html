@@ -60,13 +60,13 @@
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form popup__form_add" novalidate>
         <div class="popup__field">
-          <input type="text" placeholder="Название" name="post-name" class="popup__input popup__input_type_post-name" id="post-name-input"
-            minlength="2" maxlength="30" required>
+          <input type="text" placeholder="Название" name="post-name" class="popup__input popup__input_type_post-name"
+            id="post-name-input" minlength="2" maxlength="30" required>
           <span class="popup__error post-name-input-error"></span>
         </div>
         <div class="popup__field">
-          <input type="url" placeholder="Ссылка на картинку" name="link" class="popup__input popup__input_type_link" id="link-input"
-            required>
+          <input type="url" placeholder="Ссылка на картинку" name="link" class="popup__input popup__input_type_link"
+            id="link-input" required>
           <span class="popup__error link-input-error"></span>
         </div>
         <button type="submit" class="popup__button buttons">
@@ -91,7 +91,10 @@
       <button type="button" aria-label="Удаление карточки" class="post__delete-button"></button>
       <div class="post__bottom">
         <h2 class="post__title"></h2>
-        <button type="button" aria-label="Лайк" class="post__like"></button>
+        <div class="post__like-block">
+          <button type="button" aria-label="Лайк" class="post__like"></button>
+          <p class="post__like-counter"></p>
+        </div>
       </div>
     </article>
   </template>
