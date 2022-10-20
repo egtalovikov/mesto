@@ -1,10 +1,13 @@
 export const buttonEdit = document.querySelector('.profile__edit-button');
 export const buttonAdd = document.querySelector('.profile__add-button');
+export const buttonChangeAvatar = document.querySelector('.profile__avatar-change-button');
 export const formEditElement = document.querySelector('.popup__form_edit');
 export const formAddElement = document.querySelector('.popup__form_add');
+export const formChangeAvatarElement = document.querySelector('.popup__form_avatar')
 export const postsContainer = '.posts';
 export const postNameInput = document.querySelector('.popup__input_type_post-name');
 export const linkInput = document.querySelector('.popup__input_type_link');
+export const avatarLinkInput = document.querySelector('.popup__input_type_avatar-link');
 export const popupImage = document.querySelector('.popup__image');
 export const popupCaption = document.querySelector('.popup__image-caption');
 export const profileBio = document.querySelector('.profile__bio');
