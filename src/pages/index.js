@@ -32,8 +32,8 @@ function createCard(data) {
     data,
     '.post-template',
     handleCardClick,
-    putLikeHandler,
-    deleteLikeHandler,
+    handlePutLike,
+    handleDeleteLike,
     handleDeleteCardButton,
     profileId);
   return card.generateCard();
@@ -56,7 +56,7 @@ function handleDeleteCardButton() {
   popupConfirmationElement.open(this._id, this._element);
 }
 
-function confirmationButtonHandler(id, card) {
+function handleConfirmationButton(id, card) {
   api.deleteCard(id)
     .then(() => {
       card.remove();
@@ -103,7 +103,7 @@ const handleFormEditSubmit = (inputValues, submitButton, initialButtonText) => {
     })
 }
 
-const formChangeAvatarSubmitHandler = (inputValues, submitButton, initialButtonText) => {
+const handleFormAvatarChangeSubmit = (inputValues, submitButton, initialButtonText) => {
   popupChangeAvatarElement.renderLoading(true);
   api.changeAvatar(avatarLinkInput).
     then(() => {
@@ -119,7 +119,7 @@ const formChangeAvatarSubmitHandler = (inputValues, submitButton, initialButtonT
     })
 }
 
-function putLikeHandler(id, element) {
+function handlePutLike(id, element) {
   api.putLike(id)
     .then((result) => {
       element.textContent = result.likes.length;
@@ -130,7 +130,7 @@ function putLikeHandler(id, element) {
     })
 }
 
-function deleteLikeHandler(id, element) {
+function handleDeleteLike(id, element) {
   api.deleteLike(id)
     .then(result => {
       element.textContent = result.likes.length;
@@ -147,8 +147,8 @@ const formAvatarValidator = new FormValidator(settings, formChangeAvatarElement)
 const popupAddElement = new PopupWithForm('.popup_add', handleFormAddSubmit);
 const popupEditElement = new PopupWithForm('.popup_edit', handleFormEditSubmit);
 const popupImageElement = new PopupWithImage('.popup_image');
-const popupConfirmationElement = new PopupWithConfirmation('.popup_confirmation', confirmationButtonHandler)
-const popupChangeAvatarElement = new PopupWithForm('.popup_avatar', formChangeAvatarSubmitHandler);
+const popupConfirmationElement = new PopupWithConfirmation('.popup_confirmation', handleConfirmationButton)
+const popupChangeAvatarElement = new PopupWithForm('.popup_avatar', handleFormAvatarChangeSubmit);
 const userInfoElement = new UserInfo(profileName, profileBio);
 
 
