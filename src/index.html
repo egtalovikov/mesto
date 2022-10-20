@@ -20,10 +20,10 @@
       <section class="profile" aria-label="профиль">
         <div class="profile__avatar-block">
           <button type="button" aria-label="Смена аватара" class="profile__avatar-change-button buttons"></button>
-          <img src="" alt="Аватар" class="profile__avatar">
+          <img src="#" alt="Аватар" class="profile__avatar">
         </div>
         <div class="profile__info">
-          <h1 class="profile__name"></h1>
+          <h1 class="profile__name">Name</h1>
           <button type="button" aria-label="Редактирование профиля" class="profile__edit-button buttons"></button>
           <p class="profile__bio"></p>
         </div>
@@ -104,9 +104,9 @@
       <h2 class="popup__title">Обновить аватар</h2>
       <form class="popup__form popup__form_avatar" novalidate>
         <div class="popup__field">
-          <input type="url" placeholder="Ссылка на картинку" name="link" class="popup__input popup__input_type_avatar-link"
-            id="link-input" required>
-          <span class="popup__error link-input-error"></span>
+          <input type="url" placeholder="Ссылка на аватар" name="avatar-link" class="popup__input popup__input_type_avatar-link"
+            id="avatar-link-input" required>
+          <span class="popup__error avatar-link-input-error"></span>
         </div>
         <button type="submit" class="popup__button buttons">
           Сохранить

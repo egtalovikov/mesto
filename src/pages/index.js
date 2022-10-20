@@ -22,8 +22,7 @@ import {
   buttonChangeAvatar,
   postNameInput,
   linkInput,
-  avatarLinkInput,
-  options
+  avatarLinkInput
 } from "../utils/constants.js"
 import { data } from 'autoprefixer';
 
