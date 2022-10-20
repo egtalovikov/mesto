@@ -1,7 +1,5 @@
-import { profileId } from "../pages/index.js";
-
 export default class Card {
-  constructor(data, templateSelector, handleCardClick, handlePutLike, handleDeleteLike, handleDeleteCardButton) {
+  constructor(data, templateSelector, handleCardClick, handlePutLike, handleDeleteLike, handleDeleteCardButton, profileId) {
     this._name = data.name;
     this._link = data.link;
     this._likeCounter = data.likes;
@@ -12,6 +10,7 @@ export default class Card {
     this._handlePutLike = handlePutLike;
     this._handleDeleteLike = handleDeleteLike;
     this._handleDeleteCardButton = handleDeleteCardButton;
+    this._profileId = profileId;
   }
 
   _getTemplate() {
@@ -25,12 +24,7 @@ export default class Card {
   }
 
   _getValue() {
-    for (let i = 0; i < this._likeCounter.length; i++) {
-        if (this._likeCounter[i]._id === profileId) {
-           return true;
-        }
-        return false;
-      }
+    return this._likeCounter.some((like) => like._id === this._profileId)
   }
 
   _toggleLikeButton() {
@@ -38,35 +32,26 @@ export default class Card {
   }
 
   _handleLikeButton() {
+    this._likeCounterElement = this._element.querySelector('.post__like-counter');
     if (this._like.classList.contains('post__like_active')) {
-      this._handlePutLike()
-      .then(result => {
-        this._element.querySelector('.post__like-counter').textContent = result.likes.length;
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-
+      this._handleDeleteLike(this._id, this._likeCounterElement)
     } else {
-      this._handleDeleteLike()
-      .then(result => {
-        this._element.querySelector('.post__like-counter').textContent = result.likes.length;
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+      this._handlePutLike(this._id, this._likeCounterElement);
     }
   }
 
   _setEventListeners() {
     this._like = this._element.querySelector('.post__like');
 
-    this._deleteButton.addEventListener('click', () => this._handleDeleteCardButton());
+    this._deleteButton.addEventListener('click', () => {
+      this._handleDeleteCardButton(this._id, this._element)
+    });
     this._like.addEventListener('click', () => {
-      this._toggleLikeButton();
       this._handleLikeButton();
     });
-    this._handleCardClick(this._name, this._link);
+    this._element.querySelector('.post__photo').addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link)
+    });
   }
 
   generateCard() {
@@ -85,7 +70,7 @@ export default class Card {
     }
 
 
-    if (profileId === this._owner._id) {
+    if (this._profileId === this._owner._id) {
       this._deleteButton.classList.add('post__delete-button_visible');
     }
 

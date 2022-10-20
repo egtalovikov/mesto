@@ -1,9 +1,7 @@
 export default class UserInfo {
-  constructor(nameSelector, bioSelector, nameInput, jobInput) {
+  constructor(nameSelector, bioSelector) {
     this._nameSelector = nameSelector;
     this._bioSelector = bioSelector;
-    this._nameInput = nameInput;
-    this._jobInput = jobInput;
   }
 
   getUserInfo() {
@@ -12,8 +10,8 @@ export default class UserInfo {
     return userInfo;
   }
 
-  setUserInfo() {
-    this._nameSelector.textContent = this._nameInput.value;
-    this._bioSelector.textContent = this._jobInput.value;
+  setUserInfo(inputValues) {
+    this._nameSelector.textContent = inputValues.name;
+    this._bioSelector.textContent = inputValues.bio;
   }
 }
