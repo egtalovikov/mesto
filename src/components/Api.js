@@ -1,5 +1,3 @@
-import { avatarLinkInput } from "../utils/constants";
-
 export default class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -51,36 +49,36 @@ export default class Api {
     .then(this._getResponseData)
   }
 
-  addCard(postNameInput, linkInput) {
+  addCard(inputValues) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: postNameInput.value,
-        link: linkInput.value
+        name: inputValues.postname,
+        link: inputValues.link
       }),
     })
     .then(this._getResponseData)
   }
 
-  editProfile(nameInput, aboutInput) {
+  editProfile(inputValues) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: nameInput.value,
-        about: aboutInput.value
+        name: inputValues.name,
+        about: inputValues.bio
       })
     })
     .then(this._getResponseData)
   }
 
-  changeAvatar(avatarLinkInput) {
+  changeAvatar(inputValues) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatarLinkInput.value
+        avatar: inputValues.avatar
       })
     })
     .then(this._getResponseData)

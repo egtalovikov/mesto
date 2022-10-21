@@ -1,17 +1,25 @@
 export default class UserInfo {
-  constructor(nameSelector, bioSelector) {
-    this._nameSelector = nameSelector;
-    this._bioSelector = bioSelector;
+  constructor(settings) {
+    this._nameSelector = settings.nameSelector;
+    this._aboutSelector = settings.aboutSelector;
+    this._avatarSelector = settings.avatarSelector;
+    this._nameElement = document.querySelector(this._nameSelector);
+    this._aboutElement = document.querySelector(this._aboutSelector);
+    this._avatarElement = document.querySelector(this._avatarSelector);
   }
 
   getUserInfo() {
-    const userInfo = {name: this._nameSelector.textContent, bio: this._bioSelector.textContent};
+    const userInfo = {name: this._nameElement.textContent, bio: this._aboutElement.textContent, avatar: this._avatarElement.src};
 
     return userInfo;
   }
 
   setUserInfo(inputValues) {
-    this._nameSelector.textContent = inputValues.name;
-    this._bioSelector.textContent = inputValues.bio;
+    this._nameElement.textContent = inputValues.name;
+    this._aboutElement.textContent = inputValues.bio;
+  }
+
+  setUserAvatar(inputValues) {
+    this._avatarElement.src = inputValues.avatar;
   }
 }

@@ -44,7 +44,8 @@ export default class Card {
     this._like = this._element.querySelector('.post__like');
 
     this._deleteButton.addEventListener('click', () => {
-      this._handleDeleteCardButton(this._id, this._element)
+      this._handleDeleteCardButton.bind(this);
+      this._handleDeleteCardButton(this._id);
     });
     this._like.addEventListener('click', () => {
       this._handleLikeButton();
@@ -52,6 +53,21 @@ export default class Card {
     this._element.querySelector('.post__photo').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     });
+  }
+
+  removeCard() {
+    this._element.remove();
+    this._element = null;
+  }
+
+  putLike(result) {
+    this._likeCounterElement.textContent = result.likes.length;
+    this._toggleLikeButton();
+  }
+
+  deleteLike(result) {
+    this._likeCounterElement.textContent = result.likes.length;
+    this._toggleLikeButton();
   }
 
   generateCard() {

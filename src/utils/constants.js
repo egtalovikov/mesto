@@ -7,7 +7,6 @@ export const formChangeAvatarElement = document.querySelector('.popup__form_avat
 export const postsContainer = '.posts';
 export const postNameInput = document.querySelector('.popup__input_type_postname');
 export const linkInput = document.querySelector('.popup__input_type_link');
-export const avatarLinkInput = document.querySelector('.popup__input_type_avatar');
 export const popupImage = document.querySelector('.popup__image');
 export const popupCaption = document.querySelector('.popup__image-caption');
 export const profileBio = document.querySelector('.profile__bio');
@@ -22,4 +21,9 @@ export const settings = {
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
+};
+export const userSettings = {
+  nameSelector: '.profile__name',
+  aboutSelector: '.profile__bio',
+  avatarSelector: '.profile__avatar'
 };

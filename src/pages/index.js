@@ -12,18 +12,15 @@ import {
   formAddElement,
   formEditElement,
   formChangeAvatarElement,
-  profileName,
-  profileBio,
-  profileAvatar,
   nameInput,
   aboutInput,
+  profileBio,
+  profileName,
   postsContainer,
   buttonEdit,
   buttonAdd,
   buttonChangeAvatar,
-  postNameInput,
-  linkInput,
-  avatarLinkInput
+  userSettings
 } from "../utils/constants.js"
 import { data } from 'autoprefixer';
 
@@ -48,19 +45,21 @@ function renderCards(data) {
 const cardList = new Section(renderCards, postsContainer);
 
 
-function handleCardClick() {
-  popupImageElement.open(this._name, this._link);
+function handleCardClick(name, link) {
+  popupImageElement.open(name, link);
 }
 
-function handleDeleteCardButton() {
-  popupConfirmationElement.open(this._id, this._element);
+let thisCard;
+
+function handleDeleteCardButton(id) {
+  thisCard = this;
+  popupConfirmationElement.open(id);
 }
 
-function handleConfirmationButton(id, card) {
+function handleConfirmationButton(id) {
   api.deleteCard(id)
     .then(() => {
-      card.remove();
-      card = null;
+      thisCard.removeCard();
     })
     .catch((err) => {
       console.log(err)
@@ -69,11 +68,11 @@ function handleConfirmationButton(id, card) {
   popupConfirmationElement.close();
 }
 
-const handleFormAddSubmit = (inputValues, submitButton, initialButtonText) => {
+const handleFormAddSubmit = (inputValues) => {
   popupAddElement.renderLoading(true);
-  api.addCard(postNameInput, linkInput)
+  api.addCard(inputValues)
     .then((result) => {
-      cardList.addItem(createCard({ name: inputValues.postname, link: inputValues.link, likes: result.likes, _id: result._id, owner: result.owner }));
+      cardList.addItem(createCard(result));
 
       popupAddElement.close();
     })
@@ -82,14 +81,13 @@ const handleFormAddSubmit = (inputValues, submitButton, initialButtonText) => {
     })
     .finally(() => {
       popupAddElement.renderLoading(false);
-      submitButton.textContent = initialButtonText;
     })
 }
 
-const handleFormEditSubmit = (inputValues, submitButton, initialButtonText) => {
+const handleFormEditSubmit = (inputValues) => {
   popupEditElement.renderLoading(true);
 
-  api.editProfile(nameInput, aboutInput)
+  api.editProfile(inputValues)
     .then(() => {
       userInfoElement.setUserInfo(inputValues);
       popupEditElement.close();
@@ -99,15 +97,14 @@ const handleFormEditSubmit = (inputValues, submitButton, initialButtonText) => {
     })
     .finally(() => {
       popupEditElement.renderLoading(false);
-      submitButton.textContent = initialButtonText;
     })
 }
 
-const handleFormAvatarChangeSubmit = (inputValues, submitButton, initialButtonText) => {
+const handleFormAvatarChangeSubmit = (inputValues) => {
   popupChangeAvatarElement.renderLoading(true);
-  api.changeAvatar(avatarLinkInput).
-    then(() => {
-      profileAvatar.src = inputValues.avatar;
+  api.changeAvatar(inputValues)
+    .then(() => {
+      userInfoElement.setUserAvatar(inputValues);
       popupChangeAvatarElement.close();
     })
     .catch((err) => {
@@ -115,26 +112,23 @@ const handleFormAvatarChangeSubmit = (inputValues, submitButton, initialButtonTe
     })
     .finally(() => {
       popupChangeAvatarElement.renderLoading(false);
-      submitButton.textContent = initialButtonText;
     })
 }
 
-function handlePutLike(id, element) {
+function handlePutLike(id) {
   api.putLike(id)
     .then((result) => {
-      element.textContent = result.likes.length;
-      this._toggleLikeButton();
+      this.putLike(result);
     })
     .catch((err) => {
       console.log(err);
     })
 }
 
-function handleDeleteLike(id, element) {
+function handleDeleteLike(id) {
   api.deleteLike(id)
     .then(result => {
-      element.textContent = result.likes.length;
-      this._toggleLikeButton();
+      this.deleteLike(result);
     })
     .catch((err) => {
       console.log(err);
@@ -149,9 +143,7 @@ const popupEditElement = new PopupWithForm('.popup_edit', handleFormEditSubmit);
 const popupImageElement = new PopupWithImage('.popup_image');
 const popupConfirmationElement = new PopupWithConfirmation('.popup_confirmation', handleConfirmationButton)
 const popupChangeAvatarElement = new PopupWithForm('.popup_avatar', handleFormAvatarChangeSubmit);
-const userInfoElement = new UserInfo(profileName, profileBio);
-
-
+const userInfoElement = new UserInfo(userSettings);
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-52',
@@ -171,9 +163,10 @@ Promise.all([
 
   .then((values) => {
 
-    profileName.textContent = values[0].name;
-    profileBio.textContent = values[0].about;
-    profileAvatar.src = values[0].avatar;
+    userInfoElement.setUserInfo({ name: values[0].name, bio: values[0].about });
+
+    userInfoElement.setUserAvatar({ avatar: values[0].avatar });
+
     profileId = values[0]._id;
 
     values[1].reverse();
