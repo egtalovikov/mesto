@@ -67,7 +67,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: inputValues.name,
-        about: inputValues.bio
+        about: inputValues.about
       })
     })
     .then(this._getResponseData)

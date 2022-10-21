@@ -9,14 +9,14 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    const userInfo = {name: this._nameElement.textContent, bio: this._aboutElement.textContent, avatar: this._avatarElement.src};
+    const userInfo = {name: this._nameElement.textContent, about: this._aboutElement.textContent, avatar: this._avatarElement.src};
 
     return userInfo;
   }
 
   setUserInfo(inputValues) {
     this._nameElement.textContent = inputValues.name;
-    this._aboutElement.textContent = inputValues.bio;
+    this._aboutElement.textContent = inputValues.about;
   }
 
   setUserAvatar(inputValues) {

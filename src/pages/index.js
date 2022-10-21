@@ -14,7 +14,7 @@ import {
   formChangeAvatarElement,
   nameInput,
   aboutInput,
-  profileBio,
+  profileabout,
   profileName,
   postsContainer,
   buttonEdit,
@@ -49,17 +49,14 @@ function handleCardClick(name, link) {
   popupImageElement.open(name, link);
 }
 
-let thisCard;
-
-function handleDeleteCardButton(id) {
-  thisCard = this;
-  popupConfirmationElement.open(id);
+function handleDeleteCardButton(card) {
+  popupConfirmationElement.open(card);
 }
 
-function handleConfirmationButton(id) {
-  api.deleteCard(id)
+function handleConfirmationButton(card) {
+  api.deleteCard(card.getId())
     .then(() => {
-      thisCard.removeCard();
+      card.removeCard();
     })
     .catch((err) => {
       console.log(err)
@@ -88,8 +85,8 @@ const handleFormEditSubmit = (inputValues) => {
   popupEditElement.renderLoading(true);
 
   api.editProfile(inputValues)
-    .then(() => {
-      userInfoElement.setUserInfo(inputValues);
+    .then((result) => {
+      userInfoElement.setUserInfo(result);
       popupEditElement.close();
     })
     .catch((err) => {
@@ -103,8 +100,8 @@ const handleFormEditSubmit = (inputValues) => {
 const handleFormAvatarChangeSubmit = (inputValues) => {
   popupChangeAvatarElement.renderLoading(true);
   api.changeAvatar(inputValues)
-    .then(() => {
-      userInfoElement.setUserAvatar(inputValues);
+    .then((result) => {
+      userInfoElement.setUserAvatar(result);
       popupChangeAvatarElement.close();
     })
     .catch((err) => {
@@ -115,20 +112,20 @@ const handleFormAvatarChangeSubmit = (inputValues) => {
     })
 }
 
-function handlePutLike(id) {
-  api.putLike(id)
+function handlePutLike(card) {
+  api.putLike(card.getId())
     .then((result) => {
-      this.putLike(result);
+      card.putLike(result);
     })
     .catch((err) => {
       console.log(err);
     })
 }
 
-function handleDeleteLike(id) {
-  api.deleteLike(id)
-    .then(result => {
-      this.deleteLike(result);
+function handleDeleteLike(card) {
+  api.deleteLike(card.getId())
+    .then((result) => {
+      card.deleteLike(result);
     })
     .catch((err) => {
       console.log(err);
@@ -163,7 +160,7 @@ Promise.all([
 
   .then((values) => {
 
-    userInfoElement.setUserInfo({ name: values[0].name, bio: values[0].about });
+    userInfoElement.setUserInfo({ name: values[0].name, about: values[0].about });
 
     userInfoElement.setUserAvatar({ avatar: values[0].avatar });
 
@@ -183,7 +180,7 @@ Promise.all([
 buttonEdit.addEventListener('click', () => {
   const userInfoArray = userInfoElement.getUserInfo();
   nameInput.value = userInfoArray.name;
-  aboutInput.value = userInfoArray.bio;
+  aboutInput.value = userInfoArray.about;
   formEditValidator.resetValidation();
   popupEditElement.open();
 });

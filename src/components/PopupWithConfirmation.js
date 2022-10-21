@@ -6,14 +6,14 @@ export default class PopupWithConfirmation extends Popup {
     this._confirmationCallback = confirmationCallback;
   }
 
-  open(id) {
-    this._id = id;
+  open(card) {
+    this._card= card;
     super.open();
   }
 
   setEventListeners() {
     this._popup.querySelector('.popup__button').addEventListener('click', () => {
-      this._confirmationCallback(this._id)
+      this._confirmationCallback(this._card)
     })
     super.setEventListeners();
   }

@@ -1,4 +1,4 @@
-.profile__bio {
+.profile__about {
   font-size: 14px;
   line-height: 17px;
   text-align: center;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .profile__bio {
+  .profile__about {
     font-size: 18px;
     line-height: 22px;
     text-align: left;
