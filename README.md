@@ -1,24 +1,37 @@
-# Проект: Место
+# Mesto
 
-### Обзор
+<p align="center">
+    <img alt="Version 1.0.0" src="https://img.shields.io/badge/version-1.0.0-blue" />
+    <img alt="Quality" src="https://img.shields.io/badge/status-release-orange.svg" >
+    <img alt="Made by: egtalovikov" src="https://img.shields.io/badge/made%20by-egtalovikov-blue" />
+</p>
 
-* Описание
-* Используемые технологии
-* Github Pages
+Mesto - это проектная работа по профессии "Веб-разработчик" в [Яндекс.Практикумe](https://praktikum.yandex.ru "Яндекс Практикум").
 
-**Описание**
+**Ссылка на проект: [GitHub Pages](https://egtalovikov.github.io/mesto)**
 
-Одностраничная интерактивная социальная сеть с возможностью добавлять фотографии, удалять их, ставить лайки, редактирования профиля и просмотра увеличенного изображения. Все формы имеют валидацию.
+![Watch the video](./public/preview.gif)
 
-**Используемые технологии**
+## Описание
 
-* CSS Flexbox
-* CSS Grid
-* CSS Animations
+Одностраничная интерактивная социальная сеть с возможностью добавлять посты, удалять их, ставить лайки, редактирования профиля и просмотра увеличенного изображения. Все формы имеют валидацию. При загрузке страницы данные берутся с сервера. При отправке форм отправляются на сервер.
+
+## Стек
+
+* HTML
+* CSS
 * JavaScript
-* Nested БЭМ
-* Git
 
-**Github Pages**
 
-* [Ссылка на Github Pages](https://egtalovikov.github.io/mesto)
+## Технологии
+
+* Flexbox-верстка
+* Grid
+* Transitions
+* Позиционирование
+* API
+* Формы
+* Валидация
+* Медиа-запросы
+* БЭМ (Nested)
+* ООП
