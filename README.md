@@ -38,6 +38,11 @@ Mesto - это проектная работа по профессии "Веб-�
 
 ## Инструкция по развёртыванию
 
+<p align="center">
+    <img alt="NPM Version 8.15.0" src="https://img.shields.io/badge/npm-v8.15.0-blue" />
+    <img alt="Node Version 16.17.1" src="https://img.shields.io/badge/node-v16.17.1-blue" />
+</p>
+
 * Склонировать репозиторий
 ```
 git clone https://github.com/egtalovikov/mesto.git
